@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <title>Gestion des Produits</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">Gestion des Produits</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un produit...">
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-md-12">
+                <div id="container" class="row"></div>
+                <div id="noResults" class="alert alert-info" style="display:none; margin-top:20px;">
+                    Aucun résultat trouvé
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let produits=[
+           {"id":0,"nom":"clavier","image":"image0.jpg"},
+           {"id":1,"nom":"souris","image":"image1.jpg"},
+           {"id":2,"nom":"ecran","image":"image2.jpg"},
+           {"id":3,"nom":"ordinateur","image":"image3.jpg"}
+        ];
+
+        let container=document.querySelector("#container");
+        let searchInput=document.querySelector("#searchInput");
+        let noResults=document.querySelector("#noResults");
+        function Render(produitsAfficher){
+            container.innerHTML="";
+
+            if (produitsAfficher.length===0){
+                noResults.style.display="block";
+                return;
+            }
+
+            noResults.style.display="none";
+
+            produitsAfficher.forEach(function(produit){
+                let col=document.createElement("div");
+                col.className="col-md-3 col-sm-6 col-xs-12";
+                col.style.marginBottom="20px";
+                col.id="produit-" + produit.id;
+                col.innerHTML=`
+                    <div class="card rounded-5 shadow panel panel-default">
+                        <div class="panel-heading">
+                            <img src="${produit.image}" class="img-responsive">
+                        </div>
+                        <div class="panel-body">
+                            <h3>${produit.nom}</h3>
+                            <button class="btn btn-danger btn-sm btn-supprimer" data-id="${produit.id}">Supprimer</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(col);
+            });
+
+            document.querySelectorAll(".btn-supprimer").forEach(function(btn){
+                btn.addEventListener("click",function(){
+                    let id=this.getAttribute("data-id");
+                    suppProd(id);
+                });
+            });
+        }
+
+        function suppProd(id){
+            produits=produits.filter(function(p){
+                return p.id != id;
+            });
+            filtProd();
+        }
+
+        function filtProd(){
+            let texteRecherche=searchInput.value.toLowerCase();
+            let produitsFiltres=produits.filter(function(produit){
+                return produit.nom.toLowerCase().includes(texteRecherche);
+            });
+            Render(produitsFiltres);
+        }
+
+        searchInput.addEventListener("input",filtProd);
+        Render(produits);
+    </script>
+</body>
+</html>
