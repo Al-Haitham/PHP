@@ -39,14 +39,12 @@
             <div class="mb-3">
                 <label for="prenom">Prenom</label>
                 <input type="text" name="fname" id="prenom" class="form-control">
-                <?php echo $errors["fname"]?>
+                <span class="text-danger"><?= $errors["fname"] ?></span>
             </div>
             <div class="mb-3">
                 <label for="age">Age</label>
                 <input type="number" name="annee" id="age" class="form-control">
-                <?php if(isset($errors["annee"])): ?>
-                    <small class="text-danger"><?= $errors["annee"] ?></small>
-                <?php endif; ?>
+                <span class="text-danger"><?= $errors["annee"] ?></span>
             </div>
             <div class="mb-3">
                 <label for="ville">ville</label>
@@ -56,7 +54,10 @@
                     <option value="Safi">Safi</option>
                     <option value="Rabat">Rabat</option>
                 </select>
-                <?php if(isset($errors["town"])): ?>
+                <span class="text-danger"><?= $errors["town"] ?></span>
+            </div>
+            <div class="mb-3">
+                <label for="langues">Langues</label>
                     <small class="text-danger"><?= $errors["town"] ?></small>
                 <?php endif; ?>
             </div>
