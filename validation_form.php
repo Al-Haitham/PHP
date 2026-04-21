@@ -60,7 +60,11 @@
         echo "<div class='alert alert-success'>formulaire valide !!!!</div>";
       }
 
-       
+        if(count($errors)==0){
+        session_start();
+        $_SESSION["data"]=["fnom"=>$fnom,"age"=>$age,"lng"=>$lng,"loisirs"=>$loisirs];
+        header('Location:db.php');
+      }
 
      }
 
@@ -100,9 +104,9 @@
       <div class="mb-3">
        <label for="ville">Ville</label>
        <select name="ville" id="ville" class="form-select">
-         <option value="Agadir" <?=(isset($ville) && $ville=='Agadir')?"selected":""?>>Agadir</option>
-        <option value="Safi" <?=(isset($ville) && $ville=='Safi')?"selected":""?>>Safi</option>
-        <option value="Rabat" <?=(isset($ville) && $ville=='Rabat')?"selected":""?>>Rabat</option>
+         <option value="Agadir" <?=in_array("Agadir",$ville)?"selected":""?>>Agadir</option>
+        <option value="Safi" <?=in_array("Safi",$ville)?"selected":""?>>Safi</option>
+        <option value="Rabat" <?=in_array("Rabat",$ville)?"selected":""?>>Rabat</option>
        
         </select>
     <?php if(isset($errors["ville"]))
@@ -113,7 +117,6 @@
 
     <div class="mb-3">
        <label for="langues">Langues</label>
-       <!--la valeur du clé lang est de type tableau -->
        <select multiple name="lng[]" id="langues" class="form-select">
          <option value="Arabe" <?=  in_array('Arabe',$lng)?"selected":"";   ?>>Arabe</option>
         <option value="Français" <?=  in_array('Français',$lng)?"selected":"";   ?>>Français</option>
