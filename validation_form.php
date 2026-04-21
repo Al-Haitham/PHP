@@ -13,7 +13,6 @@
      $loisirs=[];
      $adresse="";
      $errors=[];    
-    // $method=$_SERVER["REQUEST_METHOD"];
      if($_SERVER["REQUEST_METHOD"]=="POST"){
        print_r($_POST);
       function clean($txt){
@@ -28,7 +27,6 @@
      $errors=[];
 
     
-     //valider le nom
      if(empty(clean($fnom))){
           $errors["fnom"]="le nom est requis !!!!";
      }else{
@@ -36,26 +34,21 @@
           $errors["fnom"]="le nom est invalide !!!!!!";
         }
      }
-     //valider l'age
      if($_POST["age"]==0){
          $errors["age"]="l'age est obligatoire !!!!!!";
      }
      else if($_POST["age"]<=18 || $_POST["age"]>=70){
          $errors["age"]="l'age est invalide !!!!!!";
      }
-     //valider la ville
      if(empty(clean($ville))){
           $errors["ville"]="la ville est obligatoire !!!!";
      }
-      //valider les langues
      if(count($lng)==0){
           $errors["lng"]="vous devez au moins une langue !!!!";
      }
-    //valider les loisirs
      if(count($loisirs)==0){
           $errors["loisirs"]="vous devez au moins une loisir !!!!";
      }
-   //valider l'adresse
      if(empty(clean($adresse))){
           $errors["adresse"]="l'adresse est requise !!!!";
      }else{
@@ -65,7 +58,6 @@
      }
       if(count($errors)==0){
         echo "<div class='alert alert-success'>formulaire valide !!!!</div>";
-        //header('Location:db.php');
       }
 
        
@@ -83,10 +75,7 @@
 
 </head>
 <body>
-   <!-- <div class="mt-5">
-        <span class="alert alert-primary"><?= $method;?></span>
 
-    </div>-->
     <div class=" mt-5 container w-75 mx-auto p-3 shadow bg-light rounded">
      <form action="" method="POST">
         <div class="mb-3">
