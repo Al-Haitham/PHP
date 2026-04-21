@@ -7,13 +7,25 @@
 </head>
 <body>
     <?php
-    $prix=[120,45,30,75,200];
+    $prix=[120, 45, 30, 75, 200];
 
-    $total=array_reduce($prix,fn($carry,$item)=>$carry+$item,0);
-    $max=max($prix);
-    $moyenne=$total/count($prix);
+    $total=array_reduce($prix, fn($carry, $item) => $carry + $item, 0);
 
-    echo "total: $total<br>Max: $max<br>Moyenne: $moyenne";
+    /*$max=array_reduce($prix, fn($carry, $item) => $item > $carry ? $item : $carry, 0);*/
+    $max=$prix[0];
+    for($i=0;$i<count($prix);$i++){
+        if($prix[$i]>$max){
+            $max=$prix[$i];
+        }
+    }
+    echo "le max est: $max";
+    echo "<br>";
+
+
+    $sum=array_reduce($prix, fn($carry, $item) => $carry + $item, 0);
+    $moyenne=count($prix)>0?$sum/count($prix):0;
+
+    echo "Total: $total<br>Max: $max<br>Moyenne: $moyenne";
     ?>
 </body>
 </html>
