@@ -79,6 +79,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     //when coming back from the redirected page (the request method is GET) , the user must find the form clean and empty
 }
 
+//get session data to show in the form
 $current_data=$_SESSION['form_data']??[];
 $current_errors=$_SESSION['form_errors']??[];
 
