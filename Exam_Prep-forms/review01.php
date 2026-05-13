@@ -60,17 +60,23 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $errors['skills']="au moins un competence doit etre selectioné!";
     }
 
-    if (empty($errors)){
-        $_SESSION['form_data']=$old_data;
-        header("Location: db.php");
+    //manage redirection if there are errors
+    if (empty($errors)){ //if there are no errors..
+        $_SESSION['form_data']=$old_data; //the valid current data is stored in the server's memo (session), helpful if:
+                                        // -this valid data is gonna be used/displayed in the redirect page
+                                      // -there was a problem while redirecting the user and had to return to the form with their data saved
+        header("Location: db.php"); // this simply redircet the user to the "db.php" page where it display the result/summary..
         exit();
-    }else{
-        $_SESSION['form_data']=$old_data;
-        $_SESSION['form_errors']=$errors;
+    }else{ //if there are errors..
+        $_SESSION['form_data']=$old_data;//store the invalid data so it can be re-displayed in the form for the user to edit them
+        $_SESSION['form_errors']=$errors;//store the errors so it keeps showing whenever the data is still invalid
     }
 }else{
-    unset($_SESSION['form_data']);
-    unset($_SESSION['form_errors']);
+    unset($_SESSION['form_data']);//clear form
+    unset($_SESSION['form_errors']);//clear errors
+    //if the request method is not POST, then it's GET (triggered on page refresh or in the redirected page)
+    //on refresh for example, we don't want to show the inserted data, the form should be empty
+    //when coming back from the redirected page (the request method is GET) , the user must find the form clean and empty
 }
 
 $current_data=$_SESSION['form_data']??[];

@@ -3,7 +3,7 @@ session_start();
 
 // Vérification de sécurité : si les données ne sont pas là, on renvoie au formulaire
 if (!isset($_SESSION['form_data'])) {
-    header("Location: index.php");
+    header("Location: review01.php");
     exit();
 }
 
@@ -97,7 +97,7 @@ $data = $_SESSION['form_data'];
         <span class="value"><?php echo nl2br(htmlspecialchars($data['adresse'])); ?></span>
     </div>
 
-    <a href="index.php">Retour au formulaire</a>
+    <a href="review01.php">Retour au formulaire</a>
 </div>
 
 <?php
