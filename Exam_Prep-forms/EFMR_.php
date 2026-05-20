@@ -24,7 +24,10 @@
              public function getNomAg($this){
                 return $this->nomAg;
              }
-
+            
+            public function __toString(){
+                return "$this->nomAg: $this->adresseAg"
+            }
         }
 
     ?>
