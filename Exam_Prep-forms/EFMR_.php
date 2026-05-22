@@ -26,7 +26,7 @@
              }
             
             public function __toString(){
-                return "$this->nomAg: $this->adresseAg"
+                return "$this->nomAg: $this->adresseAg";
             }
         }
 
