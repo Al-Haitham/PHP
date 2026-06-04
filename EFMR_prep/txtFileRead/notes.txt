@@ -1,0 +1,15 @@
+Jean Dupont: Admis
+Marie Martin: En attente
+Pierre Bernard: Refusé
+Sophie Petit: Admis
+Lucas Moreau: En attente
+Emma Thomas: Ajourné
+Thomas Robert: Admis
+Chloé Richard: En attente
+Nicolas Durand: Refusé
+Sarah Lefebvre: Admis
+Julien Laurent: En attente
+Camille Simon: Ajourné
+Alexandre Michel: Admis
+Laura Garcia: En attente
+Maxime Dubois: Refusé
