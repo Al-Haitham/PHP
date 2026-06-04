@@ -1,5 +1,19 @@
 
 <?php
+#method-01
+if (file_exists("notes.txt")){
+    $lines=file('notes.txt');
+    foreach ($lines as $l){
+        if (str_contains($l,"Admis")){
+            echo $l."<br>";
+        };
+    };
+}else{
+    echo "Fichier introuvable";
+}
+
+
+#method-02
 $filename="notes.txt";
 
 if (file_exists($filename)) {
