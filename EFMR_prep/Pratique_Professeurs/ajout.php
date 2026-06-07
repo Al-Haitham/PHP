@@ -1,6 +1,22 @@
 <?php
 require_once("config.php");
 
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    $code_pro=$_POST['code_pro'];
+    $nom_pro=$_POST['nom_pro'];
+    $adresse_pro=$_POST['adresse_pro'];
+    $statut_pro=$_POST['statut_pro'];
+    $date_naissance=$_POST['date_naissance'];
+    $salaire=$_POST['salaire'];
+
+    $sql="INSERT INTO professeur (code_pro,nom_pro,statut_pro,adresse_pro,date_naissance,salaire) 
+          VALUES (:code_pro,:nom_pro,:statut_pro,:adresse_pro,:date_naissance,:salaire)";
+    $stmt=$pdo->prepare($sql);
+    $stmt->execute(['code_pro'=>$code_pro,'nom_pro'=>$nom_pro,'statut_pro'=>$statut_pro,'adresse_pro'=>$adresse_pro,'date_naissance'=>$date_naissance,'salaire'=>$salaire]);
+
+    header("Location:lister.php");
+    exit;
+}
 ?>
 
 
@@ -29,6 +45,14 @@ require_once("config.php");
                 <label for="stsV">vacataire</label>
             </div>
         </div>
+        <div>
+            <label for="date_naissance">
+                Date naissance du professeur
+                <input type="date" name="date_naissance" required>
+            </label>
+        </div>
+        <input type="number" name="salaire" placeholder="Salaire du professeur">
+        <button type="sybmit">Ajouter</button>
     </form>
 </body>
 </html>
