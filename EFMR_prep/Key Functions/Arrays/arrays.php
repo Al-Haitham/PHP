@@ -28,5 +28,21 @@ print_r($v);
 
 $filtred=array_filter($z,function($pos,$item){
     return strlen($item)>=4;
-})
+});
+
+//remove / pop
+$tabspl=array_splice($t,1,2);//1: pos, 2: nbr of items to be popped
+array_splice($t,1,0,["newItam1","newItem2"]); //the fourth arg is for replacement/new items, in this case, it add new items after the pos 1
+
+
+array_push($t,"newVal"); //add in end
+array_shift($t); //remove first
+array_pop($t); //remove last
+array_unshift($t,"newVal"); //add in start
+unset($t[0]); //remove specific, the value and the pos too, without reorganizing
+// hence the use of:
+array_values($t); //to organize the tab items/pos
+in_array("item",$t); //verify existence
+array_search("itam",$t); //gives pos if exist
+
 ?>
