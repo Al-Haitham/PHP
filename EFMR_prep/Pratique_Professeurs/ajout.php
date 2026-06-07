@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['uder_id'])){
+    header("Location:login.php");
+    exit;
+}
 require_once("config.php");
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -8,6 +13,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $statut_pro=$_POST['statut_pro'];
     $date_naissance=$_POST['date_naissance'];
     $salaire=$_POST['salaire'];
+
+    $error="";
+    if(!$code_pro || !$nom_pro || !$adresse_pro || !$statut_pro || !$date_naissance || !$salaire){
+        $error="Tous les champs sont obligtoires!";
+        return;
+    }
+
+    if(!is_numeric($salaire)){
+        $error="le salaire doit etre numeric";
+        return;
+    }
+    
 
     $sql="INSERT INTO professeur (code_pro,nom_pro,statut_pro,adresse_pro,date_naissance,salaire) 
           VALUES (:code_pro,:nom_pro,:statut_pro,:adresse_pro,:date_naissance,:salaire)";
@@ -25,13 +42,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Form</title>
 </head>
 <body>
     
     <form method="POST">
+        <?php
+        if (!$error==""){ ?>
+            <p class="alert alert-danger"><?= htmlspecialchars($_POST['error']) ?></p>
+        <?php };?>
         <h4>gestion des professeurs</h4>
-        <input type="text" name="code_pro" placeholder="code du professeur" require>
+        <input type="text" name="code_pro" placeholder="code du professeur" required>
         <input type="text" name="nom_pro" placeholder="nom de professeur" required>
         <input type="text" name="adresse_pro" placeholder="adresse de professeur" required>
         <div class="row" id="sts">
@@ -52,7 +73,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             </label>
         </div>
         <input type="number" name="salaire" placeholder="Salaire du professeur">
-        <button type="sybmit">Ajouter</button>
+        <button type="submit">Ajouter</button>
     </form>
 </body>
 </html>

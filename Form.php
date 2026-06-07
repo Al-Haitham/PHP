@@ -59,7 +59,7 @@
             <div class="mb-3">
                 <label for="langues">Langues</label>
                     <small class="text-danger"><?= $errors["town"] ?></small>
-                <?php endif; ?>
+                
             </div>
             <div class="mb-3">
                 <label for="langues">Langues</label>
