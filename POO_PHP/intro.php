@@ -26,7 +26,7 @@
         private $prix;
 
         public function afficherProduit(){
-            echo "nom:$this->nom - prix:$this->prix"
+            echo "nom:$this->nom - prix:$this->prix";
         }
         public function __construct($nom="--",$prix=1){
             $this->nom=$nom;
