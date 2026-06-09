@@ -7,7 +7,7 @@ try{
     $stmt=$cnx->query($sql);
     $prof=$stmt->fetchAll(PDO::FETCH_ASSOC);
 }catch(PDOException $e){
-    die("Erreur: $getMessage($e");
+    die("Erreur: ".$e->getMessage());
 }
 ?>
 

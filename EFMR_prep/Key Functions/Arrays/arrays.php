@@ -43,6 +43,6 @@ unset($t[0]); //remove specific, the value and the pos too, without reorganizing
 // hence the use of:
 array_values($t); //to organize the tab items/pos
 in_array("item",$t); //verify existence
-array_search("itam",$t); //gives pos if exist
+array_search("item",$t); //gives pos if exist
 
 ?>

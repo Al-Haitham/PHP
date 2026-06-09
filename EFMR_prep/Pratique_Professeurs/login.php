@@ -1,22 +1,37 @@
 <?php
 session_start();
 require_once ('config.php');
+
+$erreur="";
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $username=$_POST['username'];
     $password=$_POST['password'];
 
-    $stmt=$pdo->prepare('SELECT * FROM users WHERE username=?');
-    $stmt->execute([$username]);
-    $row=$stmt->fetch();
+    if(empty($username) || empty($password)){
+        $erreur="Veuillez saisir vos infos de connexion !";
+    }
+    else{
+        $req='SELECT * FROM users WHERE username=?';
+        $stmt=$pdo->prepare($req);
+        $stmt->execute([$username]);
+        $user=$stmt->fetch(PDO::FETCH_ASSOC);
 
-    if($row && password_verify($password, $row['password'])){
-        $_SESSION['user_id']=$row['id'];
-        $_SESSION['username']=$row['username'];
-        header("Location:ajout.php");
-        exit;
-    }else{
-        $error="identifiants incorrects! ";
-        exit;
+        if($user && password_verify($password, $user['password'])){
+            $_SESSION['user_id']=$user['id'];
+            $_SESSION['username']=$user['username'];
+            header("Location:ajout.php");
+            exit;
+        }
+        
+        elseif(!password_verify($password,$user['password'])){
+            $error="mot de passe incorrects !";
+            exit;
+        }elseif(!$user){
+            $error="mot de passe incorrects !";
+            exit;
+        }
+
     }
 }
 ?>
