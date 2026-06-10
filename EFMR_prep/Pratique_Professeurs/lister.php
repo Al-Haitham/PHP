@@ -1,5 +1,10 @@
 <?php
+session_start();
 require_once('config.php');
+
+$nom_admin=$_SESSION['username'];
+$salutation=(date("H")<18)?"Bounjour":"Bonsoir";
+$msg=$salutation." ".$nom_admin;
 
 $sql="SELECT * FROM professeur";
 
