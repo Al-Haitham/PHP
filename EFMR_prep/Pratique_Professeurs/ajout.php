@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['uder_id'])){
+if(!isset($_SESSION['user_id'])){
     header("Location:login.php");
     exit;
 }
@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     $sql="INSERT INTO professeur (code_pro,nom_pro,statut_pro,adresse_pro,date_naissance,salaire) 
           VALUES (:code_pro,:nom_pro,:statut_pro,:adresse_pro,:date_naissance,:salaire)";
-    $stmt=$pdo->prepare($sql);
+    $stmt=$cnx->prepare($sql);
     $stmt->execute(['code_pro'=>$code_pro,'nom_pro'=>$nom_pro,'statut_pro'=>$statut_pro,'adresse_pro'=>$adresse_pro,'date_naissance'=>$date_naissance,'salaire'=>$salaire]);
 
     header("Location:lister.php");

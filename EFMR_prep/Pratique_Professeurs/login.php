@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }
     else{
         $req='SELECT * FROM users WHERE username=?';
-        $stmt=$pdo->prepare($req);
+        $stmt=$cnx->prepare($req);
         $stmt->execute([$username]);
         $user=$stmt->fetch(PDO::FETCH_ASSOC);
 
