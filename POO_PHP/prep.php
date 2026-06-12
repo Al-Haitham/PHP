@@ -14,7 +14,9 @@ class professeur{
         $this->Grade=$Grade;
     }
 
-    public function 
+    public function getCodePro(){
+        return $this->CodePro;
+    }
 
 }
 

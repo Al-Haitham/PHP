@@ -42,13 +42,16 @@ try{
         <tbody>
             <?php foreach($prof as $p){ ?>
             <tr>
-                <td><?= $p['code_Pro']; ?></td>
                 <td><?= $p['code_Pro'];?></td>
                 <td><?= $p['nom_Pro']; ?></td>
                 <td><?= $p['Statut_Pro']; ?></td>
                 <td><?= $p['Adresse_Pro']; ?></td>
                 <td><?= $p['Date_Naissance']; ?></td>
                 <td><?= $p['salaire']; ?></td>
+                <td>
+                    <a href="edit.php?code=".<?= $p['code_pro'];?>.""></a>
+                    <a href="del.php?code=".<?= $p['code_pro'];?>.""></a>
+                </td>
             </tr>
             <?php };?>
         </tbody>
